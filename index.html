@@ -1,0 +1,59 @@
+<!-- https://poke-holo.simey.me/  -->
+<div class="container">
+  <div class="overlay"></div>
+  <div class="card"></div>
+</div>
+
+<script>
+  const container = document.querySelector(".container");
+  const overlay = document.querySelector(".overlay");
+  container.addEventListener("mousemove", function (e) {
+    const x = e.offsetX;
+    const y = e.offsetY;
+    const rotateY = (-1 / 5) * x + 20;
+    const rotateX = (4 / 30) * y - 20;
+
+    overlay.style = `background-position: ${x / 5 + y / 5}%`;
+
+    container.style = `transform : perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  container.addEventListener("mouseout", function () {
+    overlay.style = "filter: opacity(0)";
+    container.style =
+      "transform: perspective(350px) rotateY(0deg) rotateX(0deg)";
+  });
+</script>
+
+<style>
+  .container {
+    padding: 30px;
+    width: 220px;
+    height: 310px;
+  }
+
+  .card {
+    width: 220px;
+    height: 310px;
+    background-image: url("https://pokemoncard.co.kr/info/images/renew/1_11.png");
+    background-size: cover;
+  }
+
+  .overlay {
+    position: absolute;
+    width: 220px;
+    height: 310px;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 219, 0.8) 45%,
+      rgba(132, 50, 255, 0.6) 50%,
+      transparent 54%
+    );
+    filter: brightness(1.2) opacity(0.8);
+    mix-blend-mode: color-dodge;
+    background-size: 150% 150%;
+    background-position: 100%;
+    transition: all 0.1s;
+  }
+</style>
